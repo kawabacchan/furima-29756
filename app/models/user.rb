@@ -14,4 +14,6 @@ class User < ApplicationRecord
     validates :family_kananame
     validates :first_kananame
   end
+
+  
 end
