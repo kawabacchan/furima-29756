@@ -24,11 +24,11 @@
 | --------------- | ---------- | ------------------------------ |
 | name            | string     | null: false                    |
 | content         | text       | null: false                    |
-| category        | integer    | null: false                    |
-| item_status     | integer    | null: false                    |
-| delivery_fee    | integer    | null: false                    |
-| seller_area     | integer    | null: false                    |
-| days_to_ship    | integer    | null: false                    |
+| category_id     | integer    | null: false                    |
+| item_status_id  | integer    | null: false                    |
+| delivery_fee_id | integer    | null: false                    |
+| seller_area_id  | integer    | null: false                    |
+| days_to_ship_id | integer    | null: false                    |
 | price           | integer    | null: false                    |
 | user            | references | null: false, foreign_key: true |
 
