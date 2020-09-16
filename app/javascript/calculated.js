@@ -8,4 +8,4 @@ function calculate (){
     profit.innerHTML = `${ itemPrice.value - tax }`;
   });
 }
-window.addEventListener('load', calculate)
+setInterval(calculate, 1000)
