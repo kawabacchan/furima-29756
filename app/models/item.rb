@@ -10,5 +10,5 @@ class Item < ApplicationRecord
 
   validates :name, :content, :category, :item_status, :delivery_fee, :seller_area, :days_to_ship, :price, :image, presence: true
   validates :category_id, :item_status_id, :delivery_fee_id, :seller_area_id, :days_to_ship_id, numericality: {other_than: 1}
-
+  validates :price, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
 end
