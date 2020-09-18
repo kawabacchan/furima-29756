@@ -7,8 +7,14 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = OrderAddress.new(order_params)
-    @order.save
+    @order = OrderAddress.new(token: order_params[:token])
+    if @order.valid?
+      pay_item
+      @order.save
+      return redirect_to root_path
+    else
+      render 'index'
+    end
   end
 
   private
@@ -21,6 +27,15 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order_address).permit(:token, :postal_code, :prefecture, :city, :house_number, :building, :phone_number)
+  end
+
+  def pay_item
+    Payjp.api_key = "sk_test_b0b7c4da50610557d0e74e00"
+    Payjp::Charge.create(
+      amount: Item.find(params[:item_id]).price,
+      card: order_params[:token],
+      currency: 'jpy'
+    )
   end
 
 end
