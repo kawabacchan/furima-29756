@@ -3,11 +3,13 @@ class OrdersController < ApplicationController
   before_action :move_to_root
 
   def index
+    @order = OrderAddress.new
     @item = Item.find(params[:item_id])
   end
 
   def create
     @order = OrderAddress.new(order_params)
+    @item = Item.find(params[:item_id])
     if @order.valid?
       pay_item
       @order.save
@@ -26,7 +28,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order_address).permit(:token, :postal_code, :prefecture, :city, :house_number, :building, :phone_number)
+    params.require(:order_address).permit(:token, :postal_code, :prefecture, :city, :house_number, :building, :phone_number).merge(item_id: params[:item_id], user_id: current_user.id)
   end
 
   def pay_item
