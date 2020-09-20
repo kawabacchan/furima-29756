@@ -13,7 +13,7 @@ class OrderAddress
   end
 
   def save
-    order = Order.create!(item_id: item_id, user_id: user_id)
-    ReceiveAddress.create!(postal_code: postal_code, prefecture: prefecture, city: city, house_number: house_number, building: building, phone_number: phone_number, order_id: order.id)
+    order = Order.create(item_id: item_id, user_id: user_id)
+    ReceiveAddress.create(postal_code: postal_code, prefecture: prefecture, city: city, house_number: house_number, building: building, phone_number: phone_number, order_id: order.id)
   end
 end
