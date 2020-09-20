@@ -1,15 +1,14 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :move_to_root
+  before_action :set_item, only: [:index, :create]
 
   def index
     @order = OrderAddress.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
     @order = OrderAddress.new(order_params)
-    @item = Item.find(params[:item_id])
     if @order.valid?
       pay_item
       @order.save
@@ -25,6 +24,10 @@ class OrdersController < ApplicationController
     if user_signed_in? && current_user.id == Item.find(params[:item_id]).user_id
       redirect_to root_path
     end
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 
   def order_params
